@@ -31,17 +31,17 @@ TEMPLATE = app
 
 CONFIG += c++11
 
-SOURCES +=  TEST_VirtualKeyboard.cpp \
-            main_VirtualKeyboard.cpp \
-            VirtualKeyboard.cpp
+SOURCES +=  src/TEST_VirtualKeyboard.cpp \
+            src/main_VirtualKeyboard.cpp \
+            src/VirtualKeyboard.cpp
 
-HEADERS  += TEST_VirtualKeyboard.h \
-            VirtualKeyboard.h
+HEADERS  += src/TEST_VirtualKeyboard.h \
+            src/VirtualKeyboard.h
 
-FORMS    += TEST_VirtualKeyboard.ui \
-            VirtualKeyboard.ui
+FORMS    += ui/TEST_VirtualKeyboard.ui \
+            ui/VirtualKeyboard.ui
 
-RESOURCES += resources.qrc
+RESOURCES += resources/resources.qrc
 
 OTHER_FILES += README.md
 
