@@ -33,6 +33,10 @@ TEST_VirtualKeyboard::TEST_VirtualKeyboard(QWidget *o_parent) :
 {
     this->ui->setupUi(this);
 
+    // Allow to show / hide secondary keys
+    connect(this->ui->pushButton_secondaryKeys, SIGNAL(clicked()),
+            this->mw_keyboard,                  SLOT(toggleSecondaryKeysVisibility()));
+
     // Keyboard initialisation
     if (this->mw_keyboard->initialisation(this->ui->lineEdit_input, "EN", false, true) != VIRTUALKEYBOARD_SUCCESS)
     {

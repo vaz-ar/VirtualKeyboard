@@ -233,9 +233,16 @@ void VirtualKeyboard::togglePunctuation()
 }
 
 
+void VirtualKeyboard::toggleSecondaryKeysVisibility()
+{
+    this->ui->frame_secondary->setVisible(!this->ui->frame_secondary->isVisible());
+}
+
+
 void VirtualKeyboard::setInputWidget(QWidget *w_old, QWidget *w_new)
 {
     Q_UNUSED(w_old)
+
     // Line Edit
     if (this->mw_lineEdit = qobject_cast<QLineEdit *>(w_new))
     {

@@ -14,8 +14,8 @@
    <string>TEST_VirtualKeyboard</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
      <widget class="QLabel" name="label_title">
       <property name="font">
        <font>
@@ -27,17 +27,24 @@
       </property>
      </widget>
     </item>
-    <item>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="pushButton_secondaryKeys">
+      <property name="text">
+       <string>SHow / Hide Secondary Keys</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="2">
      <widget class="QTextEdit" name="textEdit_input"/>
     </item>
-    <item>
+    <item row="2" column="0" colspan="2">
      <widget class="QPlainTextEdit" name="plainTextEdit_input"/>
     </item>
-    <item>
+    <item row="3" column="0" colspan="2">
      <widget class="QLineEdit" name="lineEdit_input"/>
     </item>
-    <item>
-     <widget class="QComboBox" name="comboBox_2">
+    <item row="4" column="0" colspan="2">
+     <widget class="QComboBox" name="comboBox_uneditable">
       <property name="currentText">
        <string>Non editable widget</string>
       </property>
@@ -48,8 +55,8 @@
       </item>
      </widget>
     </item>
-    <item>
-     <widget class="QComboBox" name="comboBox">
+    <item row="5" column="0" colspan="2">
+     <widget class="QComboBox" name="comboBox_editable">
       <property name="editable">
        <bool>true</bool>
       </property>
@@ -58,7 +65,7 @@
       </property>
      </widget>
     </item>
-    <item>
+    <item row="6" column="0" colspan="2">
      <layout class="QHBoxLayout" name="horizontalLayout_keyboard"/>
     </item>
    </layout>

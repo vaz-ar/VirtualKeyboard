@@ -231,6 +231,15 @@ private:
 public slots:
 
     /**
+     * \brief Show / Hide the secondary keys
+     */
+    void toggleSecondaryKeysVisibility();
+
+
+    // Private Slots
+private slots:
+
+    /**
      * \brief Slot connected to the QApplication::focusChanged(QWidget old, QWidget new) signal
      *
      * It allows to dynamically change the widget to interact with, depending on wich widget has received the focus
@@ -240,10 +249,6 @@ public slots:
      * \return true if \a w_new is of supported type, false if not
      */
     void setInputWidget(QWidget *w_old, QWidget *w_new);
-
-
-    // Private Slots
-private slots:
 
     /**
      * \brief Slot called on each non specific key press
@@ -294,7 +299,7 @@ private slots:
     void on_pushButton_principalKey_enter_clicked();
 
     /**
-     * @brief Slot called when pushButton_secondaryKey_copy is clicked
+     * \brief Slot called when pushButton_secondaryKey_copy is clicked
      *
      * Copy selected text to clipboard
      *
@@ -302,14 +307,14 @@ private slots:
     void on_pushButton_secondaryKey_copy_clicked();
 
     /**
-     * @brief Slot called when pushButton_secondaryKey_cut is clicked
+     * \brief Slot called when pushButton_secondaryKey_cut is clicked
      *
      * Cut selected text to clipboard
      */
     void on_pushButton_secondaryKey_cut_clicked();
 
     /**
-     * @brief Slot called when pushButton_secondaryKey_paste is clicked
+     * \brief Slot called when pushButton_secondaryKey_paste is clicked
      *
      * Paste text currently in clipboard to the selected text input zone
      */
