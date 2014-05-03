@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/keys">
+        <file alias="backspace">resources/backspace.png</file>
+        <file alias="enter">resources/enter.png</file>
+    </qresource>
+</RCC>

@@ -1,4 +1,4 @@
-The MIT License (MIT)
+/*---------------------------------------------------------------------------------------------------------------------------------
 
 Copyright (c) 2014 Arnaud Vazard
 
@@ -19,3 +19,58 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+-----------------------------------------------------------------------------------------------------------------------------------*/
+
+#ifndef TEST_VIRTUALKEYBOARD_H
+#define TEST_VIRTUALKEYBOARD_H
+
+#include <QMainWindow>
+
+#include <QDebug>
+
+#include "ui_TEST_VirtualKeyboard.h"
+#include "VirtualKeyboard.h"
+
+
+namespace Ui {
+class TEST_VirtualKeyboard;
+}
+
+/**
+ * \brief Test object for the virtual keyboard widget
+ */
+class TEST_VirtualKeyboard : public QMainWindow
+{
+    Q_OBJECT
+
+
+private:
+
+    /**
+     * User Interface
+     */
+    Ui::TEST_VirtualKeyboard *ui;
+
+    /**
+     * Keyboard Widget
+     */
+    VirtualKeyboard *mw_keyboard;
+
+public:
+
+    /**
+     * \brief Constructur
+     * \param o_parent : Parent widget
+     */
+    explicit TEST_VirtualKeyboard(QWidget *o_parent = 0);
+
+    /**
+     * \brief Destructor
+     */
+    ~TEST_VirtualKeyboard();
+
+
+};
+
+#endif // TEST_VIRTUALKEYBOARD_H

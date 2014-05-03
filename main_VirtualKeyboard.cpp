@@ -1,4 +1,4 @@
-The MIT License (MIT)
+/*---------------------------------------------------------------------------------------------------------------------------------
 
 Copyright (c) 2014 Arnaud Vazard
 
@@ -19,3 +19,20 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+-----------------------------------------------------------------------------------------------------------------------------------*/
+
+#include <QApplication>
+
+#include "TEST_VirtualKeyboard.h"
+
+
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+    TEST_VirtualKeyboard w_test;
+
+    w_test.show();
+
+    return app.exec();
+}
