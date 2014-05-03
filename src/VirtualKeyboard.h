@@ -28,10 +28,9 @@ SOFTWARE.
 #include <QFrame>
 #include <QSignalMapper>
 #include <QRegExp>
-#include <QClipboard>
-#include <QApplication>
 #include <QLineEdit>
 #include <QPlainTextEdit>
+#include <QComboBox>
 
 #include "ui_VirtualKeyboard.h"
 
@@ -89,9 +88,14 @@ private:
     QPlainTextEdit *mw_plainTextEdit;
 
     /**
-     * Widget used to initialize the keyboard, and as the default input widget
+     * Pointer used ONLY to test if the widget is a comboBox. If it is, we use the lineEdit pointer to save the comboBox's lineEdit
      */
-    QWidget *mw_defaultInputWidget;
+    QComboBox *mw_comboBox;
+
+    /**
+     * Store the last input widget used, to fallback on in case the widget focus is not supported
+     */
+    QWidget *mw_lastInputWidget;
 
     /**
      * Map the non specific keys to the keyPressed slot
@@ -173,7 +177,7 @@ public:
      *      \li QTextEdit
      *      \li QPlainTextEdit
      *
-     * \param s_language : Language used to choose the keymap. Possible choices are :
+     * \param s_language : Language used to set the keymaps. Possible choices are :
      *      \li "EN" (=> qwerty, default value)
      *      \li "FR" (=> azerty)
      *
@@ -191,6 +195,15 @@ public:
 
     // Private Functions
 private:
+
+    /**
+     * \brief initialise the keymaps
+     * \param s_language : Language used to set the keymaps. Possible choices are :
+     *      \li "EN" (=> qwerty, default value)
+     *      \li "FR" (=> azerty)
+     * \return True if the language is supported and the keymaps have been set, else False
+     */
+    bool initialisationKeymaps(QString s_language);
 
     /**
      * \brief Set the keymap from a list of QString
