@@ -176,6 +176,7 @@ public:
      *      \li QLineEdit
      *      \li QTextEdit
      *      \li QPlainTextEdit
+     *      \li QComboBox (editable)
      *
      * \param s_language : Language used to set the keymaps. Possible choices are :
      *      \li "EN" (=> qwerty, default value)

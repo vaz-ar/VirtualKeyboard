@@ -59,13 +59,24 @@ int VirtualKeyboard::initialisation(QWidget *w_inputWidget, QString s_language, 
     {
         this->mi_inputType = VIRTUALKEYBOARD_INPUT_PLAINTEXTEDIT;
     }
+    else if (this->mw_comboBox = qobject_cast<QComboBox *>(w_inputWidget))
+    {
+        // If the combobox can be edited
+        if (this->mw_comboBox->isEditable())
+        {
+            // Writing in a combobox is in fact writing in a lineEdit, so we use the lineEdit
+            this->mi_inputType = VIRTUALKEYBOARD_INPUT_LINEEDIT;
+            this->mw_lineEdit = this->mw_comboBox->lineEdit();
+        }
+    }
     else return VIRTUALKEYBOARD_UNKNOWINPUTTYPE;
+
+    // Save pointer to the input widget
+    this->mw_lastInputWidget = w_inputWidget;
 
     // Set the focus on the input widget
     w_inputWidget->setFocus();
 
-    // Save pointer to the input widget
-    this->mw_lastInputWidget = w_inputWidget;
 
     // --- Keymaps Initialisation
     if(!this->initialisationKeymaps(s_language)) return VIRTUALKEYBOARD_UNKNOWLANGUAGE;
