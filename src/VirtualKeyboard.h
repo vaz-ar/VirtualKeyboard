@@ -98,14 +98,24 @@ private:
     QWidget *mw_lastInputWidget;
 
     /**
-     * Map the non specific keys to the keyPressed slot
+     * Map the non specific "primary" keys to the keyPressed slot
      */
-    QSignalMapper mo_mapper;
+    QSignalMapper mo_mapperPrimaryKeys;
+
+    /**
+     * Map the "secondary" keys to the secondaryKeyPressed slot
+     */
+    QSignalMapper mo_mapperSecondaryKeys;
 
     /**
      * List of non specific buttons ([A - Z], [0 - 9], ...)
      */
     QList<QPushButton *> mlistw_principalKeys;
+
+    /**
+     * Map containing the secondary keys added programmatically (via addSecondaryKey)
+     */
+    QMap<int, QPushButton *> mmapw_secondaryKeys;
 
     /**
      * Lower letters Keys list
@@ -172,19 +182,19 @@ public:
     /**
      * \brief initialisation
      *
-     * \param w_inputWidget : Widget to interact with. Can be of the following types :
+     * \param[in] w_inputWidget : Widget to interact with. Can be of the following types :
      *      \li QLineEdit
      *      \li QTextEdit
      *      \li QPlainTextEdit
      *      \li QComboBox (editable)
      *
-     * \param s_language : Language used to set the keymaps. Possible choices are :
+     * \param[in] s_language : Language used to set the keymaps. Possible choices are :
      *      \li "EN" (=> qwerty, default value)
      *      \li "FR" (=> azerty)
      *
-     * \param b_displaySecondaryKeys : if true, the secondary keys will be displayed (default true)
+     * \param[in] b_displaySecondaryKeys : if true, the secondary keys will be displayed (default true)
      *
-     * \param b_displayBorder : if true, a border will be displayed around the keyboard (default false)
+     * \param[in] b_displayBorder : if true, a border will be displayed around the keyboard (default false)
      *
      * \return
      *      \li VIRTUALKEYBOARD_SUCCESS if no error occured
@@ -193,13 +203,34 @@ public:
      */
     int initialisation(QWidget *w_inputWidget, QString s_language = "EN", bool b_displaySecondaryKeys = true, bool b_displayBorder = false);
 
+    /**
+     * \brief Add a secondary key with the label s_keyText and mapped at the index i_indexMapping in the signal mapper mo_mapperSecondaryKeys
+     *
+     * If the index is already used the function returns False and no button is added
+     *
+     * \param[in] s_keyText : Key label
+     * \param[in] i_indexMapping : Index on which to map the key
+     * \return : False if the index is already used, else True
+     */
+    bool addSecondaryKey(QString s_keyText, int i_indexMapping);
+
+    /**
+     * \brief Remove a secondary key based on its index
+     *
+     * If the index does not match a key function returns False and nothing else is done
+     *
+     * \param[in] i_indexMapping : Index of the key to remove
+     * \return False if the index is not used, else True
+     */
+    bool removeSecondaryKey(int i_indexMapping);
+
 
     // Private Functions
 private:
 
     /**
      * \brief initialise the keymaps
-     * \param s_language : Language used to set the keymaps. Possible choices are :
+     * \param[in] s_language : Language used to set the keymaps. Possible choices are :
      *      \li "EN" (=> qwerty, default value)
      *      \li "FR" (=> azerty)
      * \return True if the language is supported and the keymaps have been set, else False
@@ -208,7 +239,7 @@ private:
 
     /**
      * \brief Set the keymap from a list of QString
-     * \param lists_keys : list of keys
+     * \param[in] lists_keys : list of keys
      */
     void setKeymap(QList<QString> &lists_keys);
 
@@ -228,6 +259,16 @@ private:
     void togglePunctuation();
 
 
+    // Signals
+signals:
+
+    /**
+     * \brief Signal emitted when one of the secondary key added programmatically is pressed
+     * \param[in] i_indexKey : Index to which the key is mapped
+     */
+    void secondaryKeyPressed(int i_indexKey);
+
+
     // Public Slots
 public slots:
 
@@ -245,15 +286,15 @@ private slots:
      *
      * It allows to dynamically change the widget to interact with, depending on wich widget has received the focus
      *
-     * \param w_old : last focused widget (Unused here)
-     * \param w_new : Newly focused widget
+     * \param[in] w_old : last focused widget (Unused here)
+     * \param[in] w_new : Newly focused widget
      * \return true if \a w_new is of supported type, false if not
      */
     void setInputWidget(QWidget *w_old, QWidget *w_new);
 
     /**
      * \brief Slot called on each non specific key press
-     * \param i_indexKey : Index mapped to the key via the QSignalMapper mo_mapper
+     * \param[in] i_indexKey : Index mapped to the key via the QSignalMapper mo_mapperPrimaryKeys
      */
     void keyPressed(int i_indexKey);
 

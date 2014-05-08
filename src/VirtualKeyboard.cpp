@@ -25,12 +25,13 @@ SOFTWARE.
 #include "VirtualKeyboard.h"
 
 
+
 VirtualKeyboard::VirtualKeyboard(QWidget *w_parent) :
     QFrame(w_parent),
     ui(new Ui::VirtualKeyboard),
     mw_lineEdit(NULL),
-    mw_plainTextEdit(NULL),
     mw_textEdit(NULL),
+    mw_plainTextEdit(NULL),
     mw_comboBox(NULL),
     mw_lastInputWidget(NULL),
     mi_inputType(-1)
@@ -47,19 +48,19 @@ VirtualKeyboard::~VirtualKeyboard()
 int VirtualKeyboard::initialisation(QWidget *w_inputWidget, QString s_language, bool b_displaySecondaryKeys, bool b_displayBorder)
 {
     // --- Check type of the input field to bind to the keyboard
-    if (this->mw_lineEdit = qobject_cast<QLineEdit *>(w_inputWidget))
+    if ((this->mw_lineEdit = qobject_cast<QLineEdit *>(w_inputWidget)))
     {
         this->mi_inputType = VIRTUALKEYBOARD_INPUT_LINEEDIT;
     }
-    else if (this->mw_textEdit = qobject_cast<QTextEdit *>(w_inputWidget))
+    else if ((this->mw_textEdit = qobject_cast<QTextEdit *>(w_inputWidget)))
     {
         this->mi_inputType = VIRTUALKEYBOARD_INPUT_TEXTEDIT;
     }
-    else if (this->mw_plainTextEdit = qobject_cast<QPlainTextEdit *>(w_inputWidget))
+    else if ((this->mw_plainTextEdit = qobject_cast<QPlainTextEdit *>(w_inputWidget)))
     {
         this->mi_inputType = VIRTUALKEYBOARD_INPUT_PLAINTEXTEDIT;
     }
-    else if (this->mw_comboBox = qobject_cast<QComboBox *>(w_inputWidget))
+    else if ((this->mw_comboBox = qobject_cast<QComboBox *>(w_inputWidget)))
     {
         // If the combobox can be edited
         if (this->mw_comboBox->isEditable())
@@ -71,6 +72,7 @@ int VirtualKeyboard::initialisation(QWidget *w_inputWidget, QString s_language, 
     }
     else return VIRTUALKEYBOARD_UNKNOWINPUTTYPE;
 
+
     // Save pointer to the input widget
     this->mw_lastInputWidget = w_inputWidget;
 
@@ -79,15 +81,11 @@ int VirtualKeyboard::initialisation(QWidget *w_inputWidget, QString s_language, 
 
 
     // --- Keymaps Initialisation
-    if(!this->initialisationKeymaps(s_language)) return VIRTUALKEYBOARD_UNKNOWLANGUAGE;
+    if (!this->initialisationKeymaps(s_language)) return VIRTUALKEYBOARD_UNKNOWLANGUAGE;
 
-    // Setup widget's UI
+
+    // --- Setup widget's UI
     this->ui->setupUi(this);
-
-    // --- Set CapsLock, numbers and punctuation off by default
-    this->mb_isCapsOn = false;
-    this->mb_isNumberOn = false;
-    this->mb_isPunctuationOn = false;
 
     // Display secondary keys ?
     this->ui->frame_secondary->setVisible(b_displaySecondaryKeys);
@@ -95,29 +93,97 @@ int VirtualKeyboard::initialisation(QWidget *w_inputWidget, QString s_language, 
     // Display border around keyboard ?
     this->setFrameShape(b_displayBorder ? QFrame::StyledPanel : QFrame::NoFrame);
 
+
+    // --- Set CapsLock, numbers and punctuation off by default
+    this->mb_isCapsOn = false;
+    this->mb_isNumberOn = false;
+    this->mb_isPunctuationOn = false;
+
+
     // Extraction of every QPushButton matching the regex "pushButton_principalKey_\\d\\d" into a list
     this->mlistw_principalKeys = this->findChildren<QPushButton *>(QRegExp("pushButton_principalKey_\\d\\d"));
 
     // --- Signals Mapping for non specific keys
-    connect(&this->mo_mapper,   SIGNAL(mapped(int)),
-            this,               SLOT(keyPressed(int)));
+    connect(&this->mo_mapperPrimaryKeys,    SIGNAL(mapped(int)),
+            this,                           SLOT(keyPressed(int)));
 
     for (int i_i = 0; i_i < this->mlistw_principalKeys.size(); ++i_i)
     {
+        // Connection between the button and the signal mapper
         connect(this->mlistw_principalKeys.at(i_i), SIGNAL(clicked()),
-                &this->mo_mapper,                   SLOT(map()));
-
-        this->mo_mapper.setMapping(this->mlistw_principalKeys.at(i_i), i_i);
+                &this->mo_mapperPrimaryKeys,        SLOT(map()));
+        // Map the button with the index of the list to be able to link a key press to a specific key
+        this->mo_mapperPrimaryKeys.setMapping(this->mlistw_principalKeys.at(i_i), i_i);
     }
+
+    // --- Signals Mapping for secondary keys
+    connect(&this->mo_mapperSecondaryKeys,  SIGNAL(mapped(int)),
+            this,                           SIGNAL(secondaryKeyPressed(int)));
+
 
     // --- Connection to change the input widget dynamically
     connect(qApp, &QApplication::focusChanged,
             this, &VirtualKeyboard::setInputWidget);
 
+
     // --- Set the initial keymap
     this->setKeymap(this->mlists_lowerKeymap);
 
+
     return VIRTUALKEYBOARD_SUCCESS;
+}
+
+
+bool VirtualKeyboard::addSecondaryKey(QString s_keyText, int i_indexMapping)
+{
+    // If no key has previously been added with the index i_indexMapping we add the key
+    if (!this->mmapw_secondaryKeys.contains(i_indexMapping))
+    {
+        // Button creation with the text passed as parameter
+        QPushButton *w_pushButtonSecondary = new QPushButton(s_keyText);
+
+        // Set minimum height for the button
+        w_pushButtonSecondary->setMinimumHeight(50);
+
+        // Insertion of the button in a map indexed by the mapping index, to be able to remove or modify a button
+        this->mmapw_secondaryKeys.insert(i_indexMapping, w_pushButtonSecondary);
+
+        // Add a new secondary key
+        this->ui->frame_secondary->layout()->addWidget(w_pushButtonSecondary);
+
+        // Connection between the button and the signal mapper
+        connect(w_pushButtonSecondary,          SIGNAL(clicked()),
+                &this->mo_mapperSecondaryKeys,  SLOT(map()));
+
+        // Map the button with the index passed as parameter
+        this->mo_mapperSecondaryKeys.setMapping(w_pushButtonSecondary, i_indexMapping);
+
+        return true;
+    }
+    // If a key has previously been added with the index i_indexMapping we just return false
+    else
+        return false;
+}
+
+
+bool VirtualKeyboard::removeSecondaryKey(int i_indexMapping)
+{
+    // If a key has previously been added with the index i_indexMapping we remove it
+    if (this->mmapw_secondaryKeys.contains(i_indexMapping))
+    {
+        // Remove the button from the map
+        QPushButton *w_pushButtonSecondary = this->mmapw_secondaryKeys.take(i_indexMapping);
+
+        // Remove the button from the widget
+        this->ui->frame_secondary->layout()->removeWidget(w_pushButtonSecondary);
+
+        delete w_pushButtonSecondary;
+
+        return true;
+    }
+    // If no key has previously been added with the index i_indexMapping we just return false
+    else
+        return false;
 }
 
 
@@ -255,28 +321,28 @@ void VirtualKeyboard::setInputWidget(QWidget *w_old, QWidget *w_new)
     Q_UNUSED(w_old)
 
     // Line Edit
-    if (this->mw_lineEdit = qobject_cast<QLineEdit *>(w_new))
+    if ((this->mw_lineEdit = qobject_cast<QLineEdit *>(w_new)))
     {
         this->mi_inputType = VIRTUALKEYBOARD_INPUT_LINEEDIT;
         this->mw_lastInputWidget = this->mw_lineEdit;
         return;
     }
     // Text Edit
-    else if (this->mw_textEdit = qobject_cast<QTextEdit *>(w_new))
+    else if ((this->mw_textEdit = qobject_cast<QTextEdit *>(w_new)))
     {
         this->mi_inputType = VIRTUALKEYBOARD_INPUT_TEXTEDIT;
         this->mw_lastInputWidget = this->mw_textEdit;
         return;
     }
     // Plain Text Edit
-    else if (this->mw_plainTextEdit = qobject_cast<QPlainTextEdit *>(w_new))
+    else if ((this->mw_plainTextEdit = qobject_cast<QPlainTextEdit *>(w_new)))
     {
         this->mi_inputType = VIRTUALKEYBOARD_INPUT_PLAINTEXTEDIT;
         this->mw_lastInputWidget = this->mw_plainTextEdit;
         return;
     }
     // Editable ComboBox
-    else if (this->mw_comboBox = qobject_cast<QComboBox *>(w_new))
+    else if ((this->mw_comboBox = qobject_cast<QComboBox *>(w_new)))
     {
         // If the combobox can be edited
         if (this->mw_comboBox->isEditable())
@@ -312,6 +378,7 @@ void VirtualKeyboard::keyPressed(int i_indexKey)
         this->mw_textEdit->insertPlainText(this->mlistw_principalKeys.at(i_indexKey)->text());
     }
 }
+
 
 
 void VirtualKeyboard::on_pushButton_principalKey_space_clicked()

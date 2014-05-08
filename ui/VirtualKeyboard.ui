@@ -19,7 +19,7 @@
   <property name="frameShadow">
    <enum>QFrame::Raised</enum>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
+  <layout class="QHBoxLayout" name="horizontalLayout" stretch="6,1">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout_principal">
      <item>
@@ -637,7 +637,7 @@
           <enum>Qt::NoFocus</enum>
          </property>
          <property name="icon">
-          <iconset resource="resources.qrc">
+          <iconset resource="../resources/resources.qrc">
            <normaloff>:/keys/backspace</normaloff>:/keys/backspace</iconset>
          </property>
          <property name="iconSize">
@@ -732,7 +732,7 @@
           <enum>Qt::NoFocus</enum>
          </property>
          <property name="icon">
-          <iconset resource="resources.qrc">
+          <iconset resource="../resources/resources.qrc">
            <normaloff>:/keys/enter</normaloff>:/keys/enter</iconset>
          </property>
          <property name="iconSize">
@@ -825,7 +825,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="../resources/resources.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -26,6 +26,7 @@ SOFTWARE.
 #define TEST_VIRTUALKEYBOARD_H
 
 #include <QMainWindow>
+#include <QMessageBox>
 
 #include <QDebug>
 
@@ -69,6 +70,18 @@ public:
      * \brief Destructor
      */
     ~TEST_VirtualKeyboard();
+
+
+public slots:
+
+    /**
+     * \brief Slot called when on of the programmatically added secondary key is pressed
+     *
+     * Used to demonstrate how to map secondary key with actions
+     *
+     * \param[in] i_indexKey : Index of the key pressed
+     */
+    void receiveSecondaryKeyPress(int i_indexKey);
 
 
 };
