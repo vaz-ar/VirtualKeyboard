@@ -41,9 +41,11 @@ TEST_VirtualKeyboard::TEST_VirtualKeyboard(QWidget *o_parent) :
             this,               SLOT(receiveSecondaryKeyPress(int)));
 
     // Keyboard initialisation
-    if (this->mw_keyboard->initialisation(this->ui->lineEdit_input, "EN", false, true) != VIRTUALKEYBOARD_SUCCESS)
+    int i_returnCode = this->mw_keyboard->initialisation(this->ui->comboBox_editable, "EN", false, true);
+    if (i_returnCode != VIRTUALKEYBOARD_SUCCESS)
     {
         qDebug() << " Error while initializing VirtualKeyboard widget" << endl;
+        qDebug() << " Error Code :" << i_returnCode << endl;
         return;
     }
 
@@ -52,29 +54,29 @@ TEST_VirtualKeyboard::TEST_VirtualKeyboard(QWidget *o_parent) :
 
     // --- Ad secondary keys
 
-    if(!this->mw_keyboard->addSecondaryKey("Secondary Key 1", 1))
+    if (!this->mw_keyboard->addSecondaryKey("Secondary Key 1", 1))
     {
         qDebug() << " Key not added : 'Secondary Key 1'" << endl;
     }
-    if(!this->mw_keyboard->addSecondaryKey("Secondary Key 2", 3))
+    if (!this->mw_keyboard->addSecondaryKey("Secondary Key 2", 3))
     {
         qDebug() << " Key not added : 'Secondary Key 2'" << endl;
     }
     // this key won't be added, it use the same index as the last one
-    if(!this->mw_keyboard->addSecondaryKey("Secondary Key 2 again", 3))
+    if (!this->mw_keyboard->addSecondaryKey("Secondary Key 2 again", 3))
     {
         qDebug() << " Key not added : 'Secondary Key 2 again'" << endl;
     }
-    if(!this->mw_keyboard->addSecondaryKey("Secondary Key 3", 12))
+    if (!this->mw_keyboard->addSecondaryKey("Secondary Key 3", 12))
     {
         qDebug() << " Key not added : 'Secondary Key 3'" << endl;
     }
     // this key won't be added, it use the same index as the last one
-    if(!this->mw_keyboard->addSecondaryKey("Secondary Key 3 again", 12))
+    if (!this->mw_keyboard->addSecondaryKey("Secondary Key 3 again", 12))
     {
         qDebug() << " Key not added : 'Secondary Key 3 again'" << endl;
     }
-    if(!this->mw_keyboard->addSecondaryKey("Remove Secondary Key 1", 100))
+    if (!this->mw_keyboard->addSecondaryKey("Remove Secondary Key 1", 100))
     {
         qDebug() << " Key not added : 'Remove Secondary Key 1'" << endl;
     }

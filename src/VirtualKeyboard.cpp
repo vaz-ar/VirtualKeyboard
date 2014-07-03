@@ -60,15 +60,12 @@ int VirtualKeyboard::initialisation(QWidget *w_inputWidget, QString s_language, 
     {
         this->mi_inputType = VIRTUALKEYBOARD_INPUT_PLAINTEXTEDIT;
     }
-    else if ((this->mw_comboBox = qobject_cast<QComboBox *>(w_inputWidget)))
+    // If the control is a combobox and the combobox can be edited
+    else if ((this->mw_comboBox = qobject_cast<QComboBox *>(w_inputWidget)) && this->mw_comboBox->isEditable())
     {
-        // If the combobox can be edited
-        if (this->mw_comboBox->isEditable())
-        {
-            // Writing in a combobox is in fact writing in a lineEdit, so we use the lineEdit
-            this->mi_inputType = VIRTUALKEYBOARD_INPUT_LINEEDIT;
-            this->mw_lineEdit = this->mw_comboBox->lineEdit();
-        }
+        // Writing in a combobox is in fact writing in a lineEdit, so we use the lineEdit
+        this->mi_inputType = VIRTUALKEYBOARD_INPUT_LINEEDIT;
+        this->mw_lineEdit = this->mw_comboBox->lineEdit();
     }
     else return VIRTUALKEYBOARD_UNKNOWINPUTTYPE;
 
