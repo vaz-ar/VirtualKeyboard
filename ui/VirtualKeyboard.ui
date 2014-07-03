@@ -646,6 +646,9 @@
            <height>35</height>
           </size>
          </property>
+         <property name="autoRepeat">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
       </layout>
