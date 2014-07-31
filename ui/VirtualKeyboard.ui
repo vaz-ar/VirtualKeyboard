@@ -28,7 +28,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_00">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -49,7 +49,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_01">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -70,7 +70,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_02">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -91,7 +91,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_03">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -112,7 +112,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_04">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -133,7 +133,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_05">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -154,7 +154,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_06">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -175,7 +175,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_07">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -196,7 +196,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_08">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -217,7 +217,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_09">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -242,7 +242,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_10">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -263,7 +263,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_11">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -284,7 +284,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_12">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -305,7 +305,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_13">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -326,7 +326,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_14">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -347,7 +347,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_15">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -368,7 +368,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_16">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -389,7 +389,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_17">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -410,7 +410,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_18">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -431,7 +431,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_19">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -456,7 +456,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_caps">
          <property name="minimumSize">
           <size>
-           <width>150</width>
+           <width>100</width>
            <height>50</height>
           </size>
          </property>
@@ -477,7 +477,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_20">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -498,7 +498,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_21">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -519,7 +519,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_22">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -540,7 +540,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_23">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -561,7 +561,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_24">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -582,7 +582,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_25">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -603,7 +603,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_26">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>40</width>
            <height>50</height>
           </size>
          </property>
@@ -659,7 +659,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_numbers">
          <property name="minimumSize">
           <size>
-           <width>150</width>
+           <width>100</width>
            <height>50</height>
           </size>
          </property>
@@ -680,7 +680,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_punctuation">
          <property name="minimumSize">
           <size>
-           <width>150</width>
+           <width>100</width>
            <height>50</height>
           </size>
          </property>
@@ -701,7 +701,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_space">
          <property name="minimumSize">
           <size>
-           <width>500</width>
+           <width>400</width>
            <height>50</height>
           </size>
          </property>
@@ -722,7 +722,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_enter">
          <property name="minimumSize">
           <size>
-           <width>150</width>
+           <width>100</width>
            <height>50</height>
           </size>
          </property>
