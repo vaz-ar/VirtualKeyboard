@@ -34,7 +34,7 @@ VirtualKeyboard::VirtualKeyboard(QWidget *w_parent) :
     mw_plainTextEdit(NULL),
     mw_comboBox(NULL),
     mw_lastInputWidget(NULL),
-    mi_inputType(-1)
+    mi_inputType(VIRTUALKEYBOARD_INPUT_UNKNOWINPUTTYPE)
 {
 }
 
@@ -47,35 +47,38 @@ VirtualKeyboard::~VirtualKeyboard()
 
 int VirtualKeyboard::initialisation(QWidget *w_inputWidget, QString s_language, bool b_displaySecondaryKeys, bool b_displayBorder)
 {
-    // --- Check type of the input field to bind to the keyboard
-    if ((this->mw_lineEdit = qobject_cast<QLineEdit *>(w_inputWidget)))
+    if (w_inputWidget != NULL)
     {
-        this->mi_inputType = VIRTUALKEYBOARD_INPUT_LINEEDIT;
-    }
-    else if ((this->mw_textEdit = qobject_cast<QTextEdit *>(w_inputWidget)))
-    {
-        this->mi_inputType = VIRTUALKEYBOARD_INPUT_TEXTEDIT;
-    }
-    else if ((this->mw_plainTextEdit = qobject_cast<QPlainTextEdit *>(w_inputWidget)))
-    {
-        this->mi_inputType = VIRTUALKEYBOARD_INPUT_PLAINTEXTEDIT;
-    }
-    // If the control is a combobox and the combobox can be edited
-    else if ((this->mw_comboBox = qobject_cast<QComboBox *>(w_inputWidget)) && this->mw_comboBox->isEditable())
-    {
-        // Writing in a combobox is in fact writing in a lineEdit, so we use the lineEdit
-        this->mi_inputType = VIRTUALKEYBOARD_INPUT_LINEEDIT;
-        this->mw_lineEdit = this->mw_comboBox->lineEdit();
-    }
-    else return VIRTUALKEYBOARD_UNKNOWINPUTTYPE;
+        // --- Check type of the input field to bind to the keyboard
+        if ((this->mw_lineEdit = qobject_cast<QLineEdit *>(w_inputWidget)))
+        {
+            this->mi_inputType = VIRTUALKEYBOARD_INPUT_LINEEDIT;
+        }
+        else if ((this->mw_textEdit = qobject_cast<QTextEdit *>(w_inputWidget)))
+        {
+            this->mi_inputType = VIRTUALKEYBOARD_INPUT_TEXTEDIT;
+        }
+        else if ((this->mw_plainTextEdit = qobject_cast<QPlainTextEdit *>(w_inputWidget)))
+        {
+            this->mi_inputType = VIRTUALKEYBOARD_INPUT_PLAINTEXTEDIT;
+        }
+        // If the control is a combobox and the combobox can be edited
+        else if ((this->mw_comboBox = qobject_cast<QComboBox *>(w_inputWidget)) && this->mw_comboBox->isEditable())
+        {
+            // Writing in a combobox is in fact writing in a lineEdit, so we use the lineEdit
+            this->mi_inputType = VIRTUALKEYBOARD_INPUT_LINEEDIT;
+            this->mw_lineEdit = this->mw_comboBox->lineEdit();
+        }
 
+        if (this->mi_inputType != VIRTUALKEYBOARD_INPUT_UNKNOWINPUTTYPE)
+        {
+            // Save pointer to the input widget
+            this->mw_lastInputWidget = w_inputWidget;
 
-    // Save pointer to the input widget
-    this->mw_lastInputWidget = w_inputWidget;
-
-    // Set the focus on the input widget
-    w_inputWidget->setFocus();
-
+            // Set the focus on the input widget
+            w_inputWidget->setFocus();
+        }
+    }
 
     // --- Keymaps Initialisation
     if (!this->initialisationKeymaps(s_language)) return VIRTUALKEYBOARD_UNKNOWLANGUAGE;
@@ -353,7 +356,8 @@ void VirtualKeyboard::setInputWidget(QWidget *w_old, QWidget *w_new)
     }
     // If the widget is not of a supported type, we fall back on the last widget by setting the focus on it,
     // which will call setInputWidget again
-    this->mw_lastInputWidget->setFocus();
+    if (this->mw_lastInputWidget != NULL)
+        this->mw_lastInputWidget->setFocus();
 }
 
 
@@ -438,7 +442,7 @@ void VirtualKeyboard::on_pushButton_principalKey_punctuation_clicked()
 
 void VirtualKeyboard::on_pushButton_principalKey_enter_clicked()
 {
-    // TODO Implement this slot
+    emit this->enterKeyPressed();
 }
 
 

@@ -38,12 +38,12 @@ SOFTWARE.
 // Exit codes for initialisation
 #define VIRTUALKEYBOARD_SUCCESS 0
 #define VIRTUALKEYBOARD_UNKNOWLANGUAGE  1
-#define VIRTUALKEYBOARD_UNKNOWINPUTTYPE 2
 
 // Types of input widget
 #define VIRTUALKEYBOARD_INPUT_LINEEDIT      0
 #define VIRTUALKEYBOARD_INPUT_TEXTEDIT      1
 #define VIRTUALKEYBOARD_INPUT_PLAINTEXTEDIT 2
+#define VIRTUALKEYBOARD_INPUT_UNKNOWINPUTTYPE -1
 
 // String used on some special keys
 #define VIRTUALKEYBOARD_BUTTONTEXT_NUMBERS_ON       "A/a"
@@ -199,9 +199,8 @@ public:
      * \return
      *      \li VIRTUALKEYBOARD_SUCCESS if no error occured
      *      \li VIRTUALKEYBOARD_UNKNOWLANGUAGE if the language passed is unknown
-     *      \li VIRTUALKEYBOARD_UNKNOWINPUTTYPE if the input widget is not of a supported type
      */
-    int initialisation(QWidget *w_inputWidget, QString s_language = "EN", bool b_displaySecondaryKeys = true, bool b_displayBorder = false);
+    int initialisation(QWidget *w_inputWidget = NULL, QString s_language = "EN", bool b_displaySecondaryKeys = true, bool b_displayBorder = false);
 
     /**
      * \brief Add a secondary key with the label s_keyText and mapped at the index i_indexMapping in the signal mapper mo_mapperSecondaryKeys
@@ -267,6 +266,11 @@ signals:
      * \param[in] i_indexKey : Index to which the key is mapped
      */
     void secondaryKeyPressed(int i_indexKey);
+
+    /**
+     * \brief Signal emitted when Enter key is pressed
+     */
+    void enterKeyPressed();
 
 
     // Public Slots
