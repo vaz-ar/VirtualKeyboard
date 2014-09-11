@@ -223,6 +223,15 @@ public:
      */
     bool removeSecondaryKey(int i_indexMapping);
 
+    /**
+     * \brief Connect QApplication::focusChanged to VirtualKeyboard::setInputWidget to change the input widget dynamically
+     */
+    void connectFocusChanged();
+
+    /**
+     * \brief Disconnect QApplication::focusChanged from VirtualKeyboard::setInputWidget to stop changing the input widget dynamically
+     */
+    void disconnectFocusChanged();
 
     // Private Functions
 private:

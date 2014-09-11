@@ -122,9 +122,7 @@ int VirtualKeyboard::initialisation(QWidget *w_inputWidget, QString s_language, 
 
 
     // --- Connection to change the input widget dynamically
-    connect(qApp, &QApplication::focusChanged,
-            this, &VirtualKeyboard::setInputWidget);
-
+    this->connectFocusChanged();
 
     // --- Set the initial keymap
     this->setKeymap(this->mlists_lowerKeymap);
@@ -356,8 +354,7 @@ void VirtualKeyboard::setInputWidget(QWidget *w_old, QWidget *w_new)
     }
     // If the widget is not of a supported type, we fall back on the last widget by setting the focus on it,
     // which will call setInputWidget again
-    if (this->mw_lastInputWidget != NULL)
-        this->mw_lastInputWidget->setFocus();
+    if (this->mw_lastInputWidget != NULL) this->mw_lastInputWidget->setFocus();
 }
 
 
@@ -503,4 +500,20 @@ void VirtualKeyboard::on_pushButton_secondaryKey_paste_clicked()
     {
         this->mw_textEdit->paste();
     }
+}
+
+
+void VirtualKeyboard::connectFocusChanged()
+{
+// --- Connection to change the input widget dynamically
+    this->connect(qApp, &QApplication::focusChanged,
+                  this, &VirtualKeyboard::setInputWidget);
+}
+
+
+void VirtualKeyboard::disconnectFocusChanged()
+{
+    // --- Disconnection to stop changing the input widget dynamically
+    this->disconnect(qApp, &QApplication::focusChanged,
+                     this, &VirtualKeyboard::setInputWidget);
 }
