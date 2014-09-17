@@ -701,7 +701,7 @@
         <widget class="QPushButton" name="pushButton_principalKey_space">
          <property name="minimumSize">
           <size>
-           <width>400</width>
+           <width>300</width>
            <height>50</height>
           </size>
          </property>
