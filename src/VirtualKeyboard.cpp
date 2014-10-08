@@ -352,9 +352,14 @@ void VirtualKeyboard::setInputWidget(QWidget *w_old, QWidget *w_new)
             return;
         }
     }
-    // If the widget is not of a supported type, we fall back on the last widget by setting the focus on it,
-    // which will call setInputWidget again
-    if (this->mw_lastInputWidget != NULL) this->mw_lastInputWidget->setFocus();
+    // If the widget is not of a supported type, we fall back on the last widget by setting the focus on it and calling setInputWidget again
+    else if (this->mw_lastInputWidget != NULL && this->mw_lastInputWidget->isActiveWindow())
+    {
+        this->setInputWidget(NULL, this->mw_lastInputWidget);
+        this->mw_lastInputWidget->blockSignals(true);
+        this->mw_lastInputWidget->setFocus();
+        this->mw_lastInputWidget->blockSignals(false);
+    }
 }
 
 
@@ -366,17 +371,16 @@ void VirtualKeyboard::keyPressed(int i_indexKey)
         this->mw_lineEdit->insert(this->mlistw_principalKeys.at(i_indexKey)->text());
     }
     // Plain Text Edit
-    if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_PLAINTEXTEDIT)
+    else if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_PLAINTEXTEDIT)
     {
         this->mw_plainTextEdit->insertPlainText(this->mlistw_principalKeys.at(i_indexKey)->text());
     }
     // Text Edit
-    if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_TEXTEDIT)
+    else if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_TEXTEDIT)
     {
         this->mw_textEdit->insertPlainText(this->mlistw_principalKeys.at(i_indexKey)->text());
     }
 }
-
 
 
 void VirtualKeyboard::on_pushButton_principalKey_space_clicked()
@@ -387,12 +391,12 @@ void VirtualKeyboard::on_pushButton_principalKey_space_clicked()
         this->mw_lineEdit->insert(" ");
     }
     // Plain Text Edit
-    if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_PLAINTEXTEDIT)
+    else if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_PLAINTEXTEDIT)
     {
         this->mw_plainTextEdit->insertPlainText(" ");
     }
     // Text Edit
-    if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_TEXTEDIT)
+    else if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_TEXTEDIT)
     {
         this->mw_textEdit->insertPlainText(" ");
     }
@@ -407,12 +411,12 @@ void VirtualKeyboard::on_pushButton_principalKey_backspace_clicked()
         this->mw_lineEdit->backspace();
     }
     // Plain Text Edit
-    if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_PLAINTEXTEDIT)
+    else if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_PLAINTEXTEDIT)
     {
         this->mw_plainTextEdit->textCursor().deletePreviousChar();
     }
     // Text Edit
-    if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_TEXTEDIT)
+    else if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_TEXTEDIT)
     {
         this->mw_textEdit->textCursor().deletePreviousChar();
     }
@@ -451,12 +455,12 @@ void VirtualKeyboard::on_pushButton_secondaryKey_copy_clicked()
         this->mw_lineEdit->copy();
     }
     // Plain Text Edit
-    if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_PLAINTEXTEDIT)
+    else if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_PLAINTEXTEDIT)
     {
         this->mw_plainTextEdit->copy();
     }
     // Text Edit
-    if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_TEXTEDIT)
+    else if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_TEXTEDIT)
     {
         this->mw_textEdit->copy();
     }
@@ -471,12 +475,12 @@ void VirtualKeyboard::on_pushButton_secondaryKey_cut_clicked()
         this->mw_lineEdit->cut();
     }
     // Plain Text Edit
-    if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_PLAINTEXTEDIT)
+    else if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_PLAINTEXTEDIT)
     {
         this->mw_plainTextEdit->cut();
     }
     // Text Edit
-    if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_TEXTEDIT)
+    else if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_TEXTEDIT)
     {
         this->mw_textEdit->cut();
     }
@@ -491,12 +495,12 @@ void VirtualKeyboard::on_pushButton_secondaryKey_paste_clicked()
         this->mw_lineEdit->paste();
     }
     // Plain Text Edit
-    if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_PLAINTEXTEDIT)
+    else if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_PLAINTEXTEDIT)
     {
         this->mw_plainTextEdit->paste();
     }
     // Text Edit
-    if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_TEXTEDIT)
+    else if (this->mi_inputType == VIRTUALKEYBOARD_INPUT_TEXTEDIT)
     {
         this->mw_textEdit->paste();
     }
