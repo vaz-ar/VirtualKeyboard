@@ -142,6 +142,8 @@ bool VirtualKeyboard::addSecondaryKey(QString s_keyText, int i_indexMapping)
 
         // Set minimum height for the button
         w_pushButtonSecondary->setMinimumHeight(50);
+        // Set the same font as the others secondary buttons
+        w_pushButtonSecondary->setFont(this->ui->pushButton_secondaryKey_paste->font());
 
         // Insertion of the button in a map indexed by the mapping index, to be able to remove or modify a button
         this->mmapw_secondaryKeys.insert(i_indexMapping, w_pushButtonSecondary);
