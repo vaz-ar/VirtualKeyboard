@@ -31,6 +31,7 @@ SOFTWARE.
 #include <QLineEdit>
 #include <QPlainTextEdit>
 #include <QComboBox>
+#include <QPointer>
 
 #include "ui_VirtualKeyboard.h"
 
@@ -38,6 +39,7 @@ SOFTWARE.
 // Exit codes for initialisation
 #define VIRTUALKEYBOARD_SUCCESS 0
 #define VIRTUALKEYBOARD_UNKNOWLANGUAGE  1
+#define VIRTUALKEYBOARD_INIT_FAILED     2
 
 // Types of input widget
 #define VIRTUALKEYBOARD_INPUT_LINEEDIT      0
@@ -75,27 +77,22 @@ private:
     /**
      * Pointer used to interact with a lineEdit
      */
-    QLineEdit *mw_lineEdit;
+    QPointer<QLineEdit> mw_lineEdit;
 
     /**
      * Pointer used to interact with a TextEdit
      */
-    QTextEdit *mw_textEdit;
+    QPointer<QTextEdit> mw_textEdit;
 
     /**
      * Pointer used to interact with a PlainTextEdit
      */
-    QPlainTextEdit *mw_plainTextEdit;
+    QPointer<QPlainTextEdit> mw_plainTextEdit;
 
     /**
      * Pointer used ONLY to test if the widget is a comboBox. If it is, we use the lineEdit pointer to save the comboBox's lineEdit
      */
-    QComboBox *mw_comboBox;
-
-    /**
-     * Store the last input widget used, to fallback on in case the widget focus is not supported
-     */
-    QWidget *mw_lastInputWidget;
+    QPointer<QComboBox> mw_comboBox;
 
     /**
      * Map the non specific "primary" keys to the keyPressed slot
