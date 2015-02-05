@@ -187,7 +187,7 @@ bool VirtualKeyboard::initialisationKeymaps(QString s_language)
                                << "," << "-" << "_" << "[" << "]" << "?" << ".";
 
     this->mlists_punctuationKeymap << "!" << "@" << "#" << "$" << "%" << "&&" << "*" << "(" << ")" << ""
-                                   << "," << "-" << "_" << "[" << "]" << "?" << ".";
+                                   << "," << "-" << "_" << "[" << "]" << "?" << "."  << "/" << "\\";
 
     // If the language is not EN or FR then return false
     if (s_language == "EN")
