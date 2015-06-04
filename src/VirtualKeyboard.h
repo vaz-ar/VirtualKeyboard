@@ -77,22 +77,22 @@ private:
     /**
      * Pointer used to interact with a lineEdit
      */
-    QPointer<QLineEdit> mw_lineEdit;
+    QLineEdit *mw_lineEdit;
 
     /**
      * Pointer used to interact with a TextEdit
      */
-    QPointer<QTextEdit> mw_textEdit;
+    QTextEdit *mw_textEdit;
 
     /**
      * Pointer used to interact with a PlainTextEdit
      */
-    QPointer<QPlainTextEdit> mw_plainTextEdit;
+    QPlainTextEdit *mw_plainTextEdit;
 
     /**
      * Pointer used ONLY to test if the widget is a comboBox. If it is, we use the lineEdit pointer to save the comboBox's lineEdit
      */
-    QPointer<QComboBox> mw_comboBox;
+    QComboBox *mw_comboBox;
 
     /**
      * Map the non specific "primary" keys to the keyPressed slot

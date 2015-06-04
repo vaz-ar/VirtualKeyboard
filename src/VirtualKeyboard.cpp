@@ -36,11 +36,6 @@ VirtualKeyboard::VirtualKeyboard(QWidget *w_parent) :
 
 VirtualKeyboard::~VirtualKeyboard()
 {
-    this->mw_comboBox.clear();
-    this->mw_lineEdit.clear();
-    this->mw_plainTextEdit.clear();
-    this->mw_textEdit.clear();
-
     if (this->ui != NULL) delete this->ui;
 }
 
